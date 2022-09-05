@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eCL-Jt-nJf">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="1NG-JR-Q9z">
+            <objects>
+                <navigationController id="eCL-Jt-nJf" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Te6-eq-RD4">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="GSS-cY-dlo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QWa-24-WGC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1367" y="87"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T0y-fY-tKE">
+                                <rect key="frame" x="20" y="440" width="374" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="$20 Transaction"/>
+                                <connections>
+                                    <action selector="startTransaction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vNm-OZ-QeD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ute-JN-386">
+                                <rect key="frame" x="20" y="188" width="374" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Show reader details"/>
+                                <connections>
+                                    <action selector="showReaderDetails:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rsO-YQ-t5S"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lbx-au-fK1">
+                                <rect key="frame" x="20" y="299" width="374" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Pair new reader"/>
+                                <connections>
+                                    <action selector="startPairing:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4Q8-hz-bNR"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="T0y-fY-tKE" firstAttribute="top" secondItem="Lbx-au-fK1" secondAttribute="bottom" constant="110" id="CkQ-Wl-H1U"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ute-JN-386" secondAttribute="trailing" constant="20" id="JgY-kv-kdJ"/>
+                            <constraint firstItem="Lbx-au-fK1" firstAttribute="top" secondItem="Ute-JN-386" secondAttribute="bottom" constant="80" id="TFn-Hb-EsC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="T0y-fY-tKE" secondAttribute="trailing" constant="20" id="UPf-XS-9SX"/>
+                            <constraint firstItem="Ute-JN-386" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="Wx1-nL-bd0"/>
+                            <constraint firstItem="Ute-JN-386" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="YTR-bG-oKY"/>
+                            <constraint firstItem="Lbx-au-fK1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="aG7-mi-hgQ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Lbx-au-fK1" secondAttribute="trailing" constant="20" id="lHL-gK-nvD"/>
+                            <constraint firstItem="T0y-fY-tKE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="pZg-O5-tnh"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="yiY-bo-5EP"/>
+                    <connections>
+                        <outlet property="pairNewReaderButton" destination="Lbx-au-fK1" id="15s-P0-UUM"/>
+                        <outlet property="showReaderDetailsButton" destination="Ute-JN-386" id="55b-DU-f9b"/>
+                        <outlet property="startTransactionButton" destination="T0y-fY-tKE" id="uSs-YN-7FR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-547.82608695652175" y="86.383928571428569"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
