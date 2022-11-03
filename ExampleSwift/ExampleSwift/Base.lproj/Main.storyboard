@@ -33,49 +33,67 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BFF-wC-Ov1">
-                                <rect key="frame" x="115" y="152" width="185" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BFF-wC-Ov1">
+                                <rect key="frame" x="82" y="152" width="250" height="31"/>
                                 <color key="backgroundColor" systemColor="linkColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="IBV-dU-76s"/>
+                                </constraints>
                                 <color key="tintColor" systemColor="opaqueSeparatorColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="gray" title="PAIRING"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Pairing"/>
                                 <connections>
                                     <action selector="startPairingProcess:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3Lv-ea-Fm7"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cJM-7Y-URQ">
-                                <rect key="frame" x="115" y="355" width="185" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y8z-Vg-hP8">
+                                <rect key="frame" x="82" y="345" width="250" height="31"/>
                                 <color key="backgroundColor" systemColor="linkColor"/>
                                 <color key="tintColor" systemColor="opaqueSeparatorColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="gray" title="TRANSACTION"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Settings"/>
                                 <connections>
-                                    <action selector="startTransactionAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7xh-Rp-z5g"/>
+                                    <action selector="showSettingsScreen:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wjo-2d-LCe"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y8z-Vg-hP8">
-                                <rect key="frame" x="115" y="249" width="185" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cJM-7Y-URQ" userLabel="Card Reader Transaction">
+                                <rect key="frame" x="82" y="223" width="250" height="31"/>
                                 <color key="backgroundColor" systemColor="linkColor"/>
                                 <color key="tintColor" systemColor="opaqueSeparatorColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="gray" title="READER DETAILS"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Transaction - Card Reader"/>
                                 <connections>
-                                    <action selector="showRederDetailsAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lH1-P6-xLt"/>
+                                    <action selector="startCardReaderTransaction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kgz-fN-2uc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qPJ-gL-6VC" userLabel="Manual Entry Transaction">
+                                <rect key="frame" x="82" y="274" width="250" height="31"/>
+                                <color key="backgroundColor" systemColor="linkColor"/>
+                                <color key="tintColor" systemColor="opaqueSeparatorColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Transaction - Manual Entry"/>
+                                <connections>
+                                    <action selector="startManualEntryTransaction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X3X-yN-bae"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="cJM-7Y-URQ" firstAttribute="centerX" secondItem="BFF-wC-Ov1" secondAttribute="centerX" id="32N-Dm-ehA"/>
+                            <constraint firstItem="BFF-wC-Ov1" firstAttribute="width" secondItem="cJM-7Y-URQ" secondAttribute="width" id="7pg-vO-AFu"/>
+                            <constraint firstItem="y8z-Vg-hP8" firstAttribute="top" secondItem="qPJ-gL-6VC" secondAttribute="bottom" constant="40" id="FK7-M0-glc"/>
+                            <constraint firstItem="BFF-wC-Ov1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="64" id="Skj-jJ-61m"/>
+                            <constraint firstItem="BFF-wC-Ov1" firstAttribute="width" secondItem="y8z-Vg-hP8" secondAttribute="width" id="ZYr-TS-aet"/>
+                            <constraint firstItem="BFF-wC-Ov1" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="eff-xK-IUB"/>
+                            <constraint firstItem="y8z-Vg-hP8" firstAttribute="centerX" secondItem="cJM-7Y-URQ" secondAttribute="centerX" id="gVK-YA-Srd"/>
+                            <constraint firstItem="qPJ-gL-6VC" firstAttribute="width" secondItem="BFF-wC-Ov1" secondAttribute="width" id="kIj-0r-r3I"/>
+                            <constraint firstItem="qPJ-gL-6VC" firstAttribute="centerX" secondItem="BFF-wC-Ov1" secondAttribute="centerX" id="n9C-zT-x2P"/>
+                            <constraint firstItem="cJM-7Y-URQ" firstAttribute="top" secondItem="BFF-wC-Ov1" secondAttribute="bottom" constant="40" id="oDY-iE-QbD"/>
+                            <constraint firstItem="qPJ-gL-6VC" firstAttribute="top" secondItem="cJM-7Y-URQ" secondAttribute="bottom" constant="20" id="yUb-v6-SkR"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="b8s-PL-hPU"/>
-                    <connections>
-                        <outlet property="showReadersDetailsButton" destination="y8z-Vg-hP8" id="eYo-wZ-V4S"/>
-                        <outlet property="startPairingButton" destination="BFF-wC-Ov1" id="XWM-kH-U5U"/>
-                        <outlet property="startTransactionButton" destination="cJM-7Y-URQ" id="aVz-aa-xWq"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

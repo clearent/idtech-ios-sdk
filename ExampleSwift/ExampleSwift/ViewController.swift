@@ -10,10 +10,6 @@ import ClearentIdtechIOSFramework
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var showReadersDetailsButton: UIButton!
-    @IBOutlet weak var startTransactionButton: UIButton!
-    @IBOutlet weak var startPairingButton: UIButton!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         initSDK()
@@ -21,72 +17,99 @@ class ViewController: UIViewController {
     
     func initSDK() {
         
-        // Update the SDk with needed info to work properly
-        ClearentUIManager.shared.updateWith(baseURL: Api.baseURL, apiKey: Api.apiKey, publicKey: Api.publicKey)
+        // Initalize the SDK UI with needed info to work properly
+        // ! Make sure you update the baseURL and apiKey with the correct values in order to test the SDK !
+        let baseURL = "test_url"
+        let apiKey: String? = nil
+        
+        let encryptionKeyData = Crypto.SHA256hash(data: "some_secret_here".data(using: .utf8)!)
+        let uiManagerConfig =
+        ClearentUIManagerConfiguration(baseURL: baseURL, apiKey: apiKey, publicKey: nil, offlineModeEncryptionKeyData: encryptionKeyData, enableEnhancedMessaging: true, signatureEnabled: true)
+        
+        ClearentUIManager.shared.initialize(with: uiManagerConfig)
         
         // Load the default fonts from our SDK
         UIFont.loadFonts()
         
-        // The signature step from transaction is enabled by default
-        ClearentUIManager.shared.signatureEnabled = false
-        
+        // Uncomment the code below to see how the branding mechanism works
         
         /*
-         * Uncomment the code below to see how the branding mechanism works
-        */
-
-        /*
+         // Set custom colors
          ClearentUIBrandConfigurator.shared.colorPalette = ClientColorPalette()
+         
+         // Set custom fonts
          ClearentUIBrandConfigurator.shared.fonts = ClientFonts()
+         UIFont.loadFonts(fonts: ["Arial Bold.ttf", "Arial.ttf"], bundle: Bundle(for: ViewController.self))
+         
+         // Set custom texts
          ClearentUIBrandConfigurator.shared.overriddenLocalizedStrings = [
-          "xsdk_tips_custom_amount": "🍎Custom amount",
-          "xsdk_tips_user_transaction_tip_title": "🍎Would you like to add a tip?",
-          "xsdk_tips_user_action_transaction_with_tip": "🍎Charge %@",
-          "xsdk_tips_user_action_transaction_without_tip":"🍎Maybe next time"
+             "xsdk_tips_custom_amount": "🍎Custom amount",
+             "xsdk_tips_user_transaction_tip_title": "🍎Would you like to add a tip?",
+             "xsdk_tips_user_action_transaction_with_tip": "🍎Charge %@",
+             "xsdk_tips_user_action_transaction_without_tip":"🍎Maybe next time"
          ]
          */
-
-
-        // This is how to load your own fonts
-        // UIFont.loadFonts(fonts: ["Arial Bold.ttf", "Arial.ttf"], bundle: Constants.bundle)
     }
     
     
     // MARK: Actions
     
-    @IBAction func showRederDetailsAction(_ sender: Any) {
-        
-        let readerDetailsVC = ClearentUIManager.shared.readersViewController(completion: { result in
-            // do something here after dismiss
-        })
-        self.navigationController?.present(readerDetailsVC, animated: true, completion: { })
-    }
-    
-    @IBAction func startTransactionAction(_ sender: Any) {
-        let transactionVC = ClearentUIManager.shared.paymentViewController(amount: 20.0, completion: { result in
-            // do something here after dismiss
-        })
-        self.navigationController?.present(transactionVC, animated: true, completion: { })
-    }
-    
+
     @IBAction func startPairingProcess(_ sender: Any) {
-        let pairingVC = ClearentUIManager.shared.pairingViewController(completion: { result in
+        let pairingVC = ClearentUIManager.shared.pairingViewController() { [weak self] error in
             // do something here after dismiss
-        })
-        self.navigationController?.present(pairingVC, animated: true, completion: { })
+            if let error = error {
+                self?.printError(with: error.type)
+            }
+            
+        }
+        navigationController?.present(pairingVC, animated: true, completion: { })
+    }
+    
+    @IBAction func startCardReaderTransaction(_ sender: Any) {
+        let paymentInfo = PaymentInfo(amount: randomCGFloat())
+        ClearentUIManager.shared.cardReaderPaymentIsPreferred = true
+        
+        let paymentVC = ClearentUIManager.shared.paymentViewController(paymentInfo: paymentInfo) { [weak self] error in
+            // do something here after dismiss
+            if let error = error {
+                self?.printError(with: error.type)
+            }
+        }
+        navigationController?.present(paymentVC, animated: true)
+    }
+    
+    @IBAction func startManualEntryTransaction(_ sender: Any) {
+        let paymentInfo = PaymentInfo(amount: randomCGFloat())
+        ClearentUIManager.shared.cardReaderPaymentIsPreferred = false
+        
+        let paymentVC = ClearentUIManager.shared.paymentViewController(paymentInfo: paymentInfo) { [weak self] error in
+            // do something here after dismiss
+            if let error = error {
+                self?.printError(with: error.type)
+            }
+        }
+        navigationController?.present(paymentVC, animated: true)
+    }
+    
+    @IBAction func showSettingsScreen(_ sender: Any) {
+        let settingsVC = ClearentUIManager.shared.settingsViewController() { [weak self] error in
+            // do something here after dismiss
+            if let error = error {
+                self?.printError(with: error.type)
+            }
+        }
+        navigationController?.present(settingsVC, animated: true)
+    }
+    
+    private func randomCGFloat() -> Double {
+        Double(arc4random()) /  Double(1000)
+    }
+    
+    private func printError(with type: ClearentErrorType) {
+        print("❗️Oops, something went wrong, error \(type.rawValue)")
     }
 }
-
-enum Api {
-    static var baseURL: String {
-        return "https://gateway-sb.clearent.net"
-    }
-
-    static let publicKey = "307a301406072a8648ce3d020106092b240303020801010c036200041fcefcdf366991b57f0fccf9efd587d0eee8d8ef8e5c78c17c2766d17a3b44b52bd999da8873e4daa144d76159d98a7f0fd94b65c49580ce134899f3826cd98380927c42fceec6e183a5ed4a064b43fef8507984ac855ca92b0ce32c50264670"
-
-    static let apiKey = "27a419e3ecad4d58aa6009b65e66fd81"
-}
-
 
 /*
  Example on how to implement your own branding colors
@@ -94,7 +117,7 @@ enum Api {
 
 
 class ClientColorPalette: ClearentUIColors {
-    
+
     var filledDisabledBackgroundColor: UIColor { UIColor(hexString: "#672431") }
     
     var filledDisabledButtonTextColor: UIColor { UIColor(hexString: "#672431") }
@@ -170,6 +193,28 @@ class ClientColorPalette: ClearentUIColors {
     var removeReaderButtonTextColor: UIColor { UIColor(hexString: "C2210F") }
     
     var signatureDescriptionMessageColor: UIColor { UIColor(hexString: "272431") }
+    
+    var linkButtonTextColor: UIColor { UIColor(hexString: "A12B0C") }
+    
+    var linkButtonDisabledTextColor: UIColor { UIColor(hexString: "572A31") }
+    
+    var subtitleWarningLabelColor: UIColor { UIColor(hexString: "A12B0C") }
+    
+    var fieldValidationErrorMessageColor: UIColor { UIColor(hexString: "A12B0C") }
+    
+    var settingOfflineStatusLabel: UIColor { UIColor(hexString: "272431") }
+    
+    var settingsOfflineStatusLabelFail: UIColor { UIColor(hexString: "A12B0C") }
+    
+    var settingsOfflineStatusLabelSuccess: UIColor { UIColor(hexString: "A12B0C") }
+    
+    var settingsReadersPlaceholderColor: UIColor { UIColor(hexString: "A12B0C") }
+    
+    var settingsReadersDescriptionColor: UIColor { UIColor(hexString: "272431") }
+    
+    var errorLogKeyLabelColor: UIColor { UIColor(hexString: "A12B0C") }
+    
+    var errorLogValueLabelColor: UIColor { UIColor(hexString: "572A31") }
 }
 
 
@@ -227,9 +272,19 @@ class ClientFonts: ClearentUIFonts {
     
     var detailScreenItemSubtitleFont: UIFont{ arialBoldNormal }
     
-    var detailScreenItemDescriptionFont: UIFont { arialBoldLarge }
+    var detailScreenItemDescriptionFont: UIFont { arialBoldNormal }
+    
+    var settingsScreenTitle: UIFont{ arialBoldNormal }
+    
+    var settingsOfflineModeSubtitle: UIFont{ arialBoldNormal }
+    
+    var settingsOfflineModeProcessLabel: UIFont { arialBoldNormal }
+    
+    var settingsReadersPlaceholderLabel: UIFont { arialBoldNormal }
+    
+    var settingsReadersDescriptionLabel: UIFont { arialBoldLarge }
+    
+    var offlineResultItemLabelFont: UIFont { arialBoldNormal }
+    
+    var offlineReportFieldLabel: UIFont { arialBoldNormal }
 }
-
-
-
-
