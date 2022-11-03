@@ -63,7 +63,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func startTransactionAction(_ sender: Any) {
-        let transactionVC = ClearentUIManager.shared.paymentViewController(amount: 20.0, completion: { result in
+        
+        let randomNumDouble = randomCGFloat()
+        let transactionVC = ClearentUIManager.shared.paymentViewController(amount: randomNumDouble, completion: { result in
             // do something here after dismiss
         })
         self.navigationController?.present(transactionVC, animated: true, completion: { })
@@ -74,6 +76,10 @@ class ViewController: UIViewController {
             // do something here after dismiss
         })
         self.navigationController?.present(pairingVC, animated: true, completion: { })
+    }
+    
+    func randomCGFloat() -> Double {
+        return Double(arc4random()) /  Double(1000)
     }
 }
 

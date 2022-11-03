@@ -106,7 +106,6 @@
 				C5FE9E3D53F62D03A131E1B1 /* Pods-ExampleSwift.debug.xcconfig */,
 				B083ACA47C4C1FBBB7008D5A /* Pods-ExampleSwift.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -434,7 +433,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8GJN68M5RA;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ExampleSwift/Frameworks",
