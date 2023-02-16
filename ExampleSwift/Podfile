@@ -9,5 +9,6 @@ target 'ExampleSwift' do
   use_frameworks!
 
   pod 'ClearentIdtechIOSFrameworkPod', '4.0.49' 
+
   # Pods for ExampleSwift
 end
