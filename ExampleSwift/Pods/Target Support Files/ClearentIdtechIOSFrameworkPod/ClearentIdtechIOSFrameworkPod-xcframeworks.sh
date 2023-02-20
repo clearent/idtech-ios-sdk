@@ -17,11 +17,11 @@ RSYNC_PROTECT_TMP_FILES=(--filter "P .*.??????")
 variant_for_slice()
 {
   case "$1" in
-  "IDTech.xcframework/ios-arm64_i386_x86_64-simulator")
-    echo "simulator"
-    ;;
-  "IDTech.xcframework/ios-arm64_armv7")
+  "IDTech.xcframework/ios-arm64")
     echo ""
+    ;;
+  "IDTech.xcframework/ios-arm64_x86_64-simulator")
+    echo "simulator"
     ;;
   "ClearentIdtechIOSFramework.xcframework/ios-arm64_x86_64-simulator")
     echo "simulator"
@@ -56,11 +56,11 @@ variant_for_slice()
 archs_for_slice()
 {
   case "$1" in
-  "IDTech.xcframework/ios-arm64_i386_x86_64-simulator")
-    echo "arm64 i386 x86_64"
+  "IDTech.xcframework/ios-arm64")
+    echo "arm64"
     ;;
-  "IDTech.xcframework/ios-arm64_armv7")
-    echo "arm64 armv7"
+  "IDTech.xcframework/ios-arm64_x86_64-simulator")
+    echo "arm64 x86_64"
     ;;
   "ClearentIdtechIOSFramework.xcframework/ios-arm64_x86_64-simulator")
     echo "arm64 x86_64"
@@ -171,7 +171,7 @@ install_xcframework() {
   echo "Copied $source to $destination"
 }
 
-install_xcframework "${PODS_ROOT}/ClearentIdtechIOSFrameworkPod/ClearentIdtechIOSFrameworkPod/IDTech.xcframework" "ClearentIdtechIOSFrameworkPod" "framework" "ios-arm64_i386_x86_64-simulator" "ios-arm64_armv7"
+install_xcframework "${PODS_ROOT}/ClearentIdtechIOSFrameworkPod/ClearentIdtechIOSFrameworkPod/IDTech.xcframework" "ClearentIdtechIOSFrameworkPod" "framework" "ios-arm64" "ios-arm64_x86_64-simulator"
 install_xcframework "${PODS_ROOT}/ClearentIdtechIOSFrameworkPod/ClearentIdtechIOSFrameworkPod/ClearentIdtechIOSFramework.xcframework" "ClearentIdtechIOSFrameworkPod" "framework" "ios-arm64_x86_64-simulator" "ios-arm64"
 install_xcframework "${PODS_ROOT}/ClearentIdtechIOSFrameworkPod/ClearentIdtechIOSFrameworkPod/CocoaLumberjack.xcframework" "ClearentIdtechIOSFrameworkPod" "framework" "ios-arm64_armv7" "ios-arm64_i386_x86_64-simulator"
 

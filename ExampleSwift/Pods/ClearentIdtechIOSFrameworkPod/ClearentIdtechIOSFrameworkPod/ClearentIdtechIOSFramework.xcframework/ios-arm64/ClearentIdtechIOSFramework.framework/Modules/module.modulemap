@@ -6,6 +6,6 @@ framework module ClearentIdtechIOSFramework {
 }
 
 module ClearentIdtechIOSFramework.Swift {
-    header "ClearentIdtechIOSFramework-Swift.h"
-    requires objc
+  header "ClearentIdtechIOSFramework-Swift.h"
+  requires objc
 }
