@@ -7,5 +7,5 @@ target 'ObjC-Example' do
   use_frameworks!
 
   # Pods for ObjC-Example
-  pod 'ClearentIdtechIOSFrameworkPod', '4.0.61'
+   pod 'ClearentIdtechIOSFrameworkPod', '4.0.63'
 end
